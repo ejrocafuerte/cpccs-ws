@@ -30,9 +30,10 @@ class Institucion(models.Model):
     descripcion = models.CharField(max_length=255) 
     email = models.CharField(max_length=255) 
     nombre = models.CharField(max_length=255) 
-    representante = models.CharField(max_length=255) 
     competencia = models.CharField(max_length=255) 
+    representante = models.CharField(max_length=255)
     #id = models.IntegerField(primary_key=True) 
+    publica=models.BooleanField(default=True)
     sector = models.ForeignKey( 
         Sector,
         db_column='sectorid',
@@ -117,7 +118,11 @@ class PreDenuncia(models.Model):
 
 class Provincia(models.Model): 
     nombre = models.CharField(max_length=255) 
-    #id = models.IntegerField(primary_key=True) 
+    #id = models.IntegerField(primary_key=True)
+    sector = models.ForeignKey(
+        Sector,
+        db_column='sectorid',
+        on_delete=models.CASCADE)
     
     class Meta:
         db_table = 'provincia'
@@ -209,3 +214,26 @@ class Usuario(models.Model):
  
     def __str__(self): 
         return self.nome 
+
+class InstitucionCiudad(models.Model):
+    institucion=models.ForeignKey(
+        Institucion,
+        db_column='institucionid',
+        related_name='instituciondedenuncia',
+        on_delete=models.CASCADE)
+    ciudad=models.ForeignKey(
+        Ciudad,
+        db_column='ciudadid',
+        related_name='ciudaddeinstitucion',
+        on_delete=models.CASCADE)
+    sw=models.BooleanField(default=True)
+    class Meta:
+        db_table='institucionciudad'
+
+class pais(models.Model):
+    nombre=models.CharField(max_length=255)
+    descripcion=models.CharField(max_length=255)
+    def __str__(self): 
+        return self.nombre
+    class Meta:
+        db_table='pais'

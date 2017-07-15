@@ -90,13 +90,17 @@ DATABASES = {
                 'options': '-c search_path=cpccs,public'
          },
         # Replace games with your desired database name 
-        'NAME': 'omkbmadd',
+        #'NAME': 'omkbmadd',
+        'NAME':'cpccsDB',
         # Replace username with your desired user name 
-        'USER': 'omkbmadd', 
+        #'USER': 'omkbmadd', 
+        'USER':'postgres',
         # Replace password with your desired password 
-        'PASSWORD': 'jK72m7jV5797WwXGbFX9CV0p86-gBU4x', 
+        #'PASSWORD': 'jK72m7jV5797WwXGbFX9CV0p86-gBU4x', 
+        'PASSWORD':'root',
         # Replace 127.0.0.1 with the PostgreSQL host 
-        'HOST': 'babar.elephantsql.com', 
+        #'HOST': 'babar.elephantsql.com', 
+        'HOST':'localhost',
         # Replace 5432 with the PostgreSQL configured port 
         # in case you aren't using the default port 
         'PORT': '5432', 

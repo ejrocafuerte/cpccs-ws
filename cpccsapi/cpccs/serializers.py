@@ -11,6 +11,7 @@ from cpccs.models import Provincia
 from cpccs.models import Reclamo
 from cpccs.models import Region
 from cpccs.models import Usuario
+from cpccs.models import InstitucionCiudad
 import cpccs.views 
  
 class SectorSerializer(serializers.ModelSerializer):  
@@ -181,4 +182,13 @@ class UsuarioSerializer(serializers.ModelSerializer):
 			'nombre', 
             'email', 
             'telefono'
-			)			
+			)
+
+class InstitucionCiudadSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = InstitucionCiudad
+        fields = (
+            'id',
+            'institucionid',
+            'ciudadid',
+            )
