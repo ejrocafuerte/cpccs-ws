@@ -30,6 +30,7 @@ ALLOWED_HOSTS = [
     #'.6v3gjmadmw.sa-east-1.elasticbeanstalk.com'
 	#'localhost',
     #'127.0.0.1',
+    'ejrocafuerte.pythonanywhere.com',
 ]
 
 
@@ -42,11 +43,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-	# Django REST Framework 
-    'rest_framework', 
-    # CPCCS application 
-    'cpccs.apps.CpccsConfig',  
-    # Crispy forms 
+	# Django REST Framework
+    'rest_framework',
+    # CPCCS application
+    'cpccs.apps.CpccsConfig',
+    # Crispy forms
     'crispy_forms',
     #Django Filters
     'django_filters',
@@ -87,27 +88,35 @@ WSGI_APPLICATION = 'cpccsapi.wsgi.application'
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
 DATABASES = {
-    'default': { 
-        'ENGINE': 'django.db.backends.postgresql', 
-		'OPTIONS' : {
-                'options': '-c search_path=cpccs,public'
-         },
-        # Replace games with your desired database name 
+    #'default': {
+        #'ENGINE': 'django.db.backends.postgresql',
+    #    'ENGINE': 'django.db.backends.mysql',
+	#	'OPTIONS' : {
+     #           'options': '-c search_path=cpccs'
+      #   },
+        # Replace games with your desired database name
         #'NAME': 'omkbmadd',
-        'NAME':'cpccsDB',
-        # Replace username with your desired user name 
-        #'USER': 'omkbmadd', 
-        'USER':'postgres',
-        # Replace password with your desired password 
-        #'PASSWORD': 'jK72m7jV5797WwXGbFX9CV0p86-gBU4x', 
-        'PASSWORD':'root',
-        # Replace 127.0.0.1 with the PostgreSQL host 
-        #'HOST': 'babar.elephantsql.com', 
-        'HOST':'localhost',
-        # Replace 5432 with the PostgreSQL configured port 
-        # in case you aren't using the default port 
-        'PORT': '5432', 
-    } 
+       # 'NAME':'cpccsDB',
+        # Replace username with your desired user name
+        #'USER': 'omkbmadd',
+        #'USER':'ejrocafuerte',
+        # Replace password with your desired password
+        #'PASSWORD': 'jK72m7jV5797WwXGbFX9CV0p86-gBU4x',
+        #'PASSWORD':'NyZjeXDQFcUC4xiaC_WXrF9yKXA-1gH9',
+        # Replace 127.0.0.1 with the PostgreSQL host
+        #'HOST': 'babar.elephantsql.com',
+        #'HOST':'ejrocafuerte.mysql.pythonanywhere-services.com',
+        # Replace 5432 with the PostgreSQL configured port
+        # in case you aren't using the default port
+        #'PORT': '3306',
+    #}
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'ejrocafuerte$cp',
+        'USER': 'ejrocafuerte',
+        'PASSWORD': 'Irisluciana01',
+        'HOST': 'ejrocafuerte.mysql.pythonanywhere-services.com',
+    }
 }
 
 
@@ -133,9 +142,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topicomcs/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es-ec'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Guayaquil'
 
 USE_I18N = True
 
@@ -146,23 +155,23 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject./en/1.10/howto/static-files/
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = '/home/ejrocafuerte/wp/cpccs-ws/cpccsapi/static/'
 STATIC_URL = '/static/'
 
-REST_FRAMEWORK = { 
-    'DEFAULT_PAGINATION_CLASS': 
-    'cpccs.pagination.LimitOffsetPaginationWithMaxLimit', 
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS':
+    'cpccs.pagination.LimitOffsetPaginationWithMaxLimit',
     'PAGE_SIZE': 10,
-    'DEFAULT_FILTER_BACKENDS': ( 
-        'rest_framework.filters.DjangoFilterBackend', 
-        'rest_framework.filters.SearchFilter', 
-        'rest_framework.filters.OrderingFilter', 
+    'DEFAULT_FILTER_BACKENDS': (
+        'rest_framework.filters.DjangoFilterBackend',
+        'rest_framework.filters.SearchFilter',
+        'rest_framework.filters.OrderingFilter',
         ),
-    'DEFAULT_AUTHENTICATION_CLASSES': ( 
-        'rest_framework.authentication.BasicAuthentication', 
-        'rest_framework.authentication.SessionAuthentication', 
-        ),	
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        ),
     #'DEFAULT_PERMISSION_CLASSES': (
     #    'rest_framework.permissions.IsAuthenticated',
     #)
-} 
+}
