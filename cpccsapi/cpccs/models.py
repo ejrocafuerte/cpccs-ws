@@ -166,6 +166,15 @@ class Ciudad(models.Model):
     def __str__(self): 
         return self.nombre
 
+
+class Pais(models.Model):
+    nombre=models.CharField(max_length=255)
+    descripcion=models.CharField(max_length=255)
+    def __str__(self): 
+        return self.nombre
+    class Meta:
+        db_table='pais'
+        
 class Reclamo(models.Model):
     numero= models.CharField(max_length=25)#agregado
     nombresapellidosdenunciante = models.CharField(max_length=100)#agregado
@@ -209,7 +218,7 @@ class Reclamo(models.Model):
         related_name='ciudaddenunciado') 
     denunciaprincipal=models.ForeignKey(#agregado
         PreDenuncia,
-        db_column=denunciaprincipalid,
+        db_column=id,
         on_delete=models.CASCADE)
     estado=models.PositiveSmallIntegerField()#agregado
     provinciadenunciado = models.ForeignKey( 
@@ -225,7 +234,8 @@ class Reclamo(models.Model):
     institucion=models.CharField(max_length=100)#agregado
     competenciacoordinador=models.BooleanField(default=False)#agregado
     competenciadinvestigador=models.BooleanField(default=False)#agregado
-    paisdenunciante=models.ForeignKey(#agregado
+    #agregado
+    paisdenunciante=models.ForeignKey(
         Pais,
         db_column='paisdenuncianteid',
         on_delete=models.CASCADE)
@@ -267,11 +277,3 @@ class InstitucionCiudad(models.Model):
     sw=models.BooleanField(default=True)
     class Meta:
         db_table='institucionciudad'
-
-class Pais(models.Model):
-    nombre=models.CharField(max_length=255)
-    descripcion=models.CharField(max_length=255)
-    def __str__(self): 
-        return self.nombre
-    class Meta:
-        db_table='pais'
