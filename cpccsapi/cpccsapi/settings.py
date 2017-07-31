@@ -167,7 +167,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject./en/1.10/howto/static-files/
-STATIC_ROOT = '/home/ejrocafuerte/wp/cpccs-ws/cpccsapi/static/'
+STATIC_ROOT = '/cpccs-ws/cpccsapi/static/'
 STATIC_URL = '/static/'
 
 REST_FRAMEWORK = {
