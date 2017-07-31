@@ -94,7 +94,7 @@ DATABASES = {
 #        'USER': 'root',
 #        'PASSWORD': 'rubik',
 #        'HOST': 'localhost',
-    }
+#    }
 #'default': {
 #'ENGINE': 'django.db.backends.postgresql',
 #		'OPTIONS' : {
@@ -130,7 +130,7 @@ DATABASES = {
 		#'PORT': '3306',
 	#}
 	'default': {
-	    'OPTIONS':{
+		'OPTIONS':{
 	        'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
 	        },
 	    'ENGINE': 'django.db.backends.mysql',
@@ -138,8 +138,9 @@ DATABASES = {
 	    'USER': 'ejrocafuerte',
 		'PASSWORD': 'Irisluciana01',
 		'HOST': 'ejrocafuerte.mysql.pythonanywhere-services.com',
-	}
-}
+		}
+		}
+
 
 
 # Password validation
