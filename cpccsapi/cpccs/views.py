@@ -130,6 +130,11 @@ class EtniaList(generics.ListCreateAPIView):
     queryset = Etnia.objects.all()
     serializer_class = EtniaSerializer
     name = 'etnia-list'
+class FileUploadView(views.APIView):
+    parser_classes = (FileUploadParser,)
+    def put(self, request, filename, format=None):
+        file_obj = request.data['file']
+        return Response(status=204)
 
 class ApiRoot(generics.GenericAPIView):
     name = 'api-root'
