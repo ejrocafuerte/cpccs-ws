@@ -48,5 +48,5 @@ urlpatterns = [
     url(r'^$',
         views.ApiRoot.as_view(),
         name=views.ApiRoot.name),
-    url(r'^upload/(?P<filename>[^/]+)$', FileUploadView.as_view())
+    url(r'^upload/(?P<filename>[^/]+)$', FileUploadView.as_view()),
 ]
