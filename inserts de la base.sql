@@ -6825,7 +6825,7 @@ INSERT INTO institucionciudad (id, ciudadid, institucionid, sw) VALUES (162860, 
 INSERT INTO institucionciudad (id, ciudadid, institucionid, sw) VALUES (162972, 101, 1848, false);
 INSERT INTO institucionciudad (id, ciudadid, institucionid, sw) VALUES (162973, 130, 658, false);
 INSERT INTO institucionciudad (id, ciudadid, institucionid, sw) VALUES (163299, 157, 163298, false);
-*/
+
 --tabla nacionalidad columnas id, descripcion
 INSERT INTO nacionalidad VALUES (1, 'Ecuatoriano');
 INSERT INTO nacionalidad VALUES (2, 'Extranjero');
