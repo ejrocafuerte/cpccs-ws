@@ -6,7 +6,7 @@ class Sector(models.Model):
     descripcion = models.CharField(max_length=255) 
     control = models.CharField(max_length=5) 
     mensaje = models.CharField(max_length=255)
-	
+    
     class Meta:
         db_table = 'sector'
         ordering = ('nombre',) 
@@ -23,8 +23,8 @@ class EstadoCivil(models.Model):
         ordering = ('nombre',) 
  
     def __str__(self): 
-        return self.nombre		
-		
+        return self.nombre      
+        
 class Institucion(models.Model): 
     url = models.CharField(max_length=255) 
     descripcion = models.CharField(max_length=255) 
@@ -44,7 +44,7 @@ class Institucion(models.Model):
         ordering = ('id',) 
  
     def __str__(self): 
-        return self.nombre		
+        return self.nombre      
 
 class Nacionalidad(models.Model): 
     nombre = models.CharField(max_length=255) 
@@ -55,8 +55,8 @@ class Nacionalidad(models.Model):
         ordering = ('id',) 
  
     def __str__(self): 
-        return self.nombre		
-		
+        return self.nombre      
+        
 class NivelEducacion(models.Model): 
     nombre = models.CharField(max_length=255) 
     descripcion = models.CharField(max_length=255) 
@@ -67,8 +67,8 @@ class NivelEducacion(models.Model):
         ordering = ('id',) 
  
     def __str__(self): 
-        return self.nombre		
-		
+        return self.nombre      
+        
 class Ocupacion(models.Model): 
     nombre = models.CharField(max_length=255) 
     descripcion = models.CharField(max_length=255) 
@@ -82,27 +82,20 @@ class Ocupacion(models.Model):
         return self.nombre
 
 class PreDenuncia(models.Model): 
-    asunto = models.TextField()
-    tipoorigen=models.CharField(max_length=255)
     tipodenuncia = models.CharField(max_length=1) 
-    tipoagregado=models.CharField(max_length=255)
-    observacionesduplicacion=models.CharField(max_length=255)
-    razondescartardenuncia=models.CharField(max_length=255)
     generodenunciante = models.CharField(max_length=1) 
-    generodenunciado = models.CharField(max_length=1)
-    yaeninvestigacion=models.BooleanField(default=False)
-    descripcioninvestigacion = models.CharField(max_length=255)
-    unidaddireccionafecta = models.CharField(max_length=255)
-    funcionariopublico = models.BooleanField()
+    descripcioninvestigacion = models.CharField(max_length=255) 
+    generodenunciado = models.CharField(max_length=1) 
+    funcionariopublico = models.CharField(max_length=255, blank=True, default='') 
     #id = models.IntegerField(primary_key=True) 
-    niveleducaciondenunciante = models.ForeignKey(
-        NivelEducacion,
+    niveleducaciondenunciante = models.ForeignKey( 
+        NivelEducacion,  
         db_column='niveleducaciondenuncianteid',
         on_delete=models.CASCADE) 
     ocupaciondenunciante = models.ForeignKey( 
         Ocupacion,  
         db_column='ocupaciondenuncianteid',
-		on_delete=models.CASCADE) 
+        on_delete=models.CASCADE) 
     nacionalidaddenunciante = models.ForeignKey( 
         Nacionalidad,  
         db_column='nacionalidaddenuncianteid',
@@ -115,14 +108,13 @@ class PreDenuncia(models.Model):
         Institucion,  
         db_column='institucionimplicadaid',
         on_delete=models.CASCADE)
-    tipoactualizacion = models.CharField(max_length=255)
     
     class Meta:
         db_table = 'predenuncia'
         ordering = ('id',) 
  
     def __str__(self): 
-        return self.id		
+        return self.id      
 class Region(models.Model): 
     nombre = models.CharField(max_length=255) 
     descripcion = models.CharField(max_length=255) 
@@ -166,84 +158,44 @@ class Ciudad(models.Model):
     def __str__(self): 
         return self.nombre
 
-
-class Pais(models.Model):
-    nombre=models.CharField(max_length=255)
-    descripcion=models.CharField(max_length=255)
-    def __str__(self): 
-        return self.nombre
-    class Meta:
-        db_table='pais'
-        
-class Reclamo(models.Model):
-    numero= models.CharField(max_length=25)#agregado
-    nombresapellidosdenunciante = models.CharField(max_length=100)#agregado
+class Reclamo(models.Model): 
+    nombresapellidosdenunciante = models.CharField(max_length=255)
     tipoidentificacion = models.CharField(max_length=255)
-    numidenti = models.CharField(max_length=255)
+    numidenti = models.CharField(max_length=255) 
     direccion = models.CharField(max_length=255, blank=True, default='') 
     email = models.CharField(max_length=255) 
-    telefono = models.CharField(max_length=50, blank=True, default='')
-    nombresapellidosdenunciado = models.CharField(max_length=100)#agregado
-    cargo = models.CharField(max_length=100, blank=True, default='')
+    nombresapellidosdenunciado = models.CharField(max_length=255) 
+    telefono = models.CharField(max_length=255, blank=True, default='')
+    cargo = models.CharField(max_length=255, blank=True, default='')
     comparecer = models.BooleanField(default=False) 
     documentores = models.BooleanField(default=False)
     identidadreservada = models.BooleanField(default=False)
     resideextrangero = models.BooleanField(default=False)
-    #id = models.IntegerField(primary_key=True)
-    fechaingreso=models.DateField(auto_now_add=True)#agregado
-    otraciudaddenunciante=models.CharField(max_length=255)
-    otraciudaddenunciado=models.CharField(max_length=255)
-    edad=models.PositiveSmallIntegerField()#agregado
-    principal=models.BooleanField(default=True)#agregado
-    nuevocambio=models.BooleanField(default=True)#agregado
-    fechaultimocambio=models.DateField(auto_now=True)#agregado
-    listaanexodocumento=models.TextField()#agregado
-    institucionimplicada = models.ForeignKey( 
-        Institucion,
-        db_column='insttitucionimplicadaid',
-        on_delete=models.CASCADE) 
-    ciudaddenunciante = models.ForeignKey(
+    #id = models.IntegerField(primary_key=True) 
+    ciudaddeldenunciante = models.ForeignKey( 
         Ciudad,
         db_column='ciudaddeldenuncianteid',
         related_name='ciudaddeldenunciante',
+        on_delete=models.CASCADE) 
+    ciudaddeldenunciado = models.ForeignKey( 
+        Ciudad,
+        db_column='ciudaddeldenunciadoid',
+        related_name='ciudaddenunciado') 
+    institucionimplicada = models.ForeignKey( 
+        Institucion,
+        db_column='insttitucionimplicadaid',
         on_delete=models.CASCADE) 
     provinciadenunciante = models.ForeignKey( 
         Provincia,
         db_column='provinciadenuncianteid',
         related_name='provinciadenunciante',  
         on_delete=models.CASCADE) 
-    ciudaddeldenunciado = models.ForeignKey( 
-        Ciudad,
-        db_column='ciudaddeldenunciadoid',
-        related_name='ciudaddenunciado') 
-    denunciaprincipal=models.ForeignKey(#agregado
-        PreDenuncia,
-        db_column=id,
-        on_delete=models.CASCADE)
-    estado=models.PositiveSmallIntegerField()#agregado
     provinciadenunciado = models.ForeignKey( 
         Provincia,
-        db_column='provinciadenunciandoid',
+        db_column='provinciadenunciadoid',
         related_name='provinciadenunciado',
-        on_delete=models.CASCADE)
-    ciudadorigen = models.ForeignKey(#agregado
-        Ciudad,
-        db_column='ciudadorigenid',
-        related_name='ciudadorigen',
-        on_delete=models.CASCADE)
-    institucion=models.CharField(max_length=100)#agregado
-    competenciacoordinador=models.BooleanField(default=False)#agregado
-    competenciadinvestigador=models.BooleanField(default=False)#agregado
-    #agregado
-    paisdenunciante=models.ForeignKey(
-        Pais,
-        db_column='paisdenuncianteid',
-        on_delete=models.CASCADE)
-    comentariodinvestigacion=models.TextField()
-
-
-
-
+        on_delete=models.CASCADE) 
+    
     class Meta:
         db_table = 'reclamo'
         ordering = ('id',) 
@@ -277,3 +229,11 @@ class InstitucionCiudad(models.Model):
     sw=models.BooleanField(default=True)
     class Meta:
         db_table='institucionciudad'
+
+class pais(models.Model):
+    nombre=models.CharField(max_length=255)
+    descripcion=models.CharField(max_length=255)
+    def __str__(self): 
+        return self.nombre
+    class Meta:
+        db_table='pais'
