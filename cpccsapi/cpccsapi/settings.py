@@ -30,7 +30,7 @@ ALLOWED_HOSTS = [
 	#'.6v3gjmadmw.sa-east-1.elasticbeanstalk.com'
 	#'localhost',
 	#'127.0.0.1',
-	#'ejrocafuerte.pythonanywhere.com',
+	'ejrocafuerte.pythonanywhere.com',
 ]
 
 
@@ -88,18 +88,18 @@ WSGI_APPLICATION = 'cpccsapi.wsgi.application'
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
 DATABASES = {
-'default': {
-'ENGINE': 'django.db.backends.postgresql',
-		'OPTIONS' : {
-		#'options': '-c search_path=cpccs'
-		'options': '-c search_path=public'
-		},
-		'NAME': 'cpccsDB',
-		'USER': 'postgres',
-		'PASSWORD':'root',
-		'HOST': 'localhost',
-		'PORT': '5432',
-	}
+#'default': {
+#'ENGINE': 'django.db.backends.postgresql',
+#		'OPTIONS' : {
+#		#'options': '-c search_path=cpccs'
+#		'options': '-c search_path=public'
+#		},
+#		'NAME': 'cpccsDB',
+#		'USER': 'postgres',
+#		'PASSWORD':'root',
+#		'HOST': 'localhost',
+#		'PORT': '5432',
+#	}
 	#'default': {
 		#'ENGINE': 'django.db.backends.postgresql',
 	#    'ENGINE': 'django.db.backends.mysql',
@@ -122,13 +122,16 @@ DATABASES = {
 		# in case you aren't using the default port
 		#'PORT': '3306',
 	#}
-	#'default': {
-	 #   'ENGINE': 'django.db.backends.mysql',
-	  #  'NAME': 'ejrocafuerte$cp',
-	   # 'USER': 'ejrocafuerte',
-		#'PASSWORD': 'Irisluciana01',
-		#'HOST': 'ejrocafuerte.mysql.pythonanywhere-services.com',
-	#}
+	'default': {
+	    'OPTIONS':{
+	        'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+	        },
+	    'ENGINE': 'django.db.backends.mysql',
+	    'NAME': 'ejrocafuerte$default',
+	    'USER': 'ejrocafuerte',
+		'PASSWORD': 'Irisluciana01',
+		'HOST': 'ejrocafuerte.mysql.pythonanywhere-services.com',
+	}
 }
 
 

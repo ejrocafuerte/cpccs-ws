@@ -1,6 +1,6 @@
-from rest_framework import serializers 
-from cpccs.models import Sector 
-from cpccs.models import Ciudad 
+from rest_framework import serializers
+from cpccs.models import Sector
+from cpccs.models import Ciudad
 from cpccs.models import EstadoCivil
 from cpccs.models import Institucion
 from cpccs.models import Nacionalidad
@@ -12,44 +12,46 @@ from cpccs.models import Reclamo
 from cpccs.models import Region
 from cpccs.models import Usuario
 from cpccs.models import InstitucionCiudad
-import cpccs.views 
- 
-class SectorSerializer(serializers.ModelSerializer):  
- 
-    class Meta: 
+from cpccs.models import Pais
+from cpccs.models import Etnia
+import cpccs.views
+
+class SectorSerializer(serializers.ModelSerializer):
+
+    class Meta:
         model = Sector
-        fields = ( 
-            'nombre', 
-            'descripcion', 
+        fields = (
+            'nombre',
+            'descripcion',
             'mensaje',
 			'control'
 			)
 
-class CiudadSerializer(serializers.ModelSerializer):  
- 
-    class Meta: 
+class CiudadSerializer(serializers.ModelSerializer):
+
+    class Meta:
         model = Ciudad
-        fields = ( 
-            'nombre', 
-            'id', 
+        fields = (
+            'nombre',
+            'id',
             'provincia'
 			)
 
-class EstadoCivilSerializer(serializers.ModelSerializer):  
- 
-    class Meta: 
+class EstadoCivilSerializer(serializers.ModelSerializer):
+
+    class Meta:
         model = EstadoCivil
-        fields = ( 
-            'nombre', 
+        fields = (
+            'nombre',
             'id'
 			)
 
-class InstitucionSerializer(serializers.ModelSerializer):  
- 
-    class Meta: 
+class InstitucionSerializer(serializers.ModelSerializer):
+
+    class Meta:
         model = Institucion
-        fields = ( 
-            #'url', 
+        fields = (
+            #'url',
             #'descripcion',
 			#'email',
 			'nombre',
@@ -58,37 +60,37 @@ class InstitucionSerializer(serializers.ModelSerializer):
 			'id',
 			'sector'
 			)
-			
-class NacionalidadSerializer(serializers.ModelSerializer):  
- 
-    class Meta: 
+
+class NacionalidadSerializer(serializers.ModelSerializer):
+
+    class Meta:
         model = Nacionalidad
-        fields = ( 
-            'nombre', 
-            'id'
-			)
-		
-class NivelEducacionSerializer(serializers.ModelSerializer):  
- 
-    class Meta: 
-        model = NivelEducacion
-        fields = ( 
-            'nombre', 
-            'descripcion', 
+        fields = (
+            'nombre',
             'id'
 			)
 
-class OcupacionSerializer(serializers.ModelSerializer):  
- 
-    class Meta: 
-        model = Ocupacion
-        fields = ( 
-            'nombre', 
-            'descripcion', 
+class NivelEducacionSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = NivelEducacion
+        fields = (
+            'nombre',
+            'descripcion',
             'id'
 			)
-			
-class PreDenunciaSerializer(serializers.ModelSerializer):  
+
+class OcupacionSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Ocupacion
+        fields = (
+            'nombre',
+            'descripcion',
+            'id'
+			)
+
+class PreDenunciaSerializer(serializers.ModelSerializer):
     tipo = serializers.CharField(source='tipodenuncia')
     genero_denunciante = serializers.CharField(source='generodenunciante')
     descripcion_investigacion = serializers.CharField(source='descripcioninvestigacion')
@@ -100,32 +102,32 @@ class PreDenunciaSerializer(serializers.ModelSerializer):
     estado_civil_denunciante = serializers.PrimaryKeyRelatedField(source='estadocivildenunciante', queryset=EstadoCivil.objects.all())
     institucion_implicada = serializers.PrimaryKeyRelatedField(source='institucionimplicada', queryset=Institucion.objects.all())
 
-    class Meta: 
+    class Meta:
         model = PreDenuncia
-        fields = ( 
-            'tipo', 
-            'genero_denunciante', 
+        fields = (
+            'tipo',
+            'genero_denunciante',
             'descripcion_investigacion',
-			'genero_denunciado', 
-            'funcionario_publico', 
+			'genero_denunciado',
+            'funcionario_publico',
             'id',
-			'nivel_educacion_denunciante', 
-            'ocupacion_denunciante', 
+			'nivel_educacion_denunciante',
+            'ocupacion_denunciante',
             'nacionalidad_denunciante',
-			'estado_civil_denunciante', 
+			'estado_civil_denunciante',
             'institucion_implicada'
 			)
 
-class ProvinciaSerializer(serializers.ModelSerializer):  
- 
-    class Meta: 
-        model = Provincia
-        fields = ( 
-            'nombre', 
-            'id'
-			)			
+class ProvinciaSerializer(serializers.ModelSerializer):
 
-class ReclamoSerializer(serializers.ModelSerializer):  
+    class Meta:
+        model = Provincia
+        fields = (
+            'nombre',
+            'id'
+			)
+
+class ReclamoSerializer(serializers.ModelSerializer):
     nombres_apellidos_denunciante = serializers.CharField(source='nombresapellidosdenunciante')
     tipo_identificacion = serializers.CharField(source='tipoidentificacion')
     numero_identificacion = serializers.CharField(source='numidenti')
@@ -137,50 +139,50 @@ class ReclamoSerializer(serializers.ModelSerializer):
     institucion_implicada = serializers.PrimaryKeyRelatedField(source='institucionimplicada', queryset=Institucion.objects.all())
     provincia_denunciante = serializers.PrimaryKeyRelatedField(source='provinciadenunciante', queryset=Provincia.objects.all())
     provincia_denunciado = serializers.PrimaryKeyRelatedField(source='provinciadenunciado', queryset=Provincia.objects.all())
-    
-    class Meta: 
+
+    class Meta:
         model = Reclamo
-        fields = ( 
-            'nombres_apellidos_denunciante', 
-            'tipo_identificacion', 
+        fields = (
+            'nombres_apellidos_denunciante',
+            'tipo_identificacion',
             'numero_identificacion',
-			'direccion', 
-            'email', 
+			'direccion',
+            'email',
             'nombres_apellidos_denunciado',
-			'telefono', 
-            'cargo', 
+			'telefono',
+            'cargo',
             'comparecer',
-			'documentores', 
+			'documentores',
             'identidad_reservada',
-			'reside_extranjero', 
-            'id', 
+			'reside_extranjero',
+            'id',
             'ciudad_del_denunciante',
 			'ciudad_del_denunciado',
-			'institucion_implicada', 
+			'institucion_implicada',
             'provincia_denunciante',
 			'provincia_denunciado'
 			)
-			
-class RegionSerializer(serializers.ModelSerializer):  
- 
-    class Meta: 
+
+class RegionSerializer(serializers.ModelSerializer):
+
+    class Meta:
         model = Region
-        fields = ( 
-            'nombre', 
-            'descripcion', 
+        fields = (
+            'nombre',
+            'descripcion',
             'id'
-			)			
-			
-class UsuarioSerializer(serializers.ModelSerializer):  
+			)
+
+class UsuarioSerializer(serializers.ModelSerializer):
     nombre = serializers.CharField(source='nome')
     telefono = serializers.CharField(source='telefone')
 
-    class Meta: 
+    class Meta:
         model = Usuario
-        fields = ( 
+        fields = (
             'id',
-			'nombre', 
-            'email', 
+			'nombre',
+            'email',
             'telefono'
 			)
 
@@ -191,4 +193,20 @@ class InstitucionCiudadSerializer(serializers.ModelSerializer):
             'id',
             'institucionid',
             'ciudadid',
+            )
+
+class PaisSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Pais
+        fields = (
+            'id',
+            'nombre',
+            )
+
+class EtniaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Etnia
+        fields = (
+            'id',
+            'nombre',
             )
