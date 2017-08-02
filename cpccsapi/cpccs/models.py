@@ -245,3 +245,12 @@ class Etnia(models.Model):
     class Meta:
         db_table='etnia'
         ordering = ('nombre',)
+
+class Evidencia(models.Model):
+    denuncia=models.ForeignKey(
+        PreDenuncia,
+        db_column='denunciaid')
+    fecha=models.DateField(auto_now=True)
+    archivo=models.FileField(upload_to='uploads/denuncia/%Y/%m/%d/')
+    class Meta:
+        db_table='evidencia'

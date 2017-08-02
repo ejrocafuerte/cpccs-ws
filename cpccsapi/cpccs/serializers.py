@@ -14,6 +14,7 @@ from cpccs.models import Usuario
 from cpccs.models import InstitucionCiudad
 from cpccs.models import Pais
 from cpccs.models import Etnia
+from cpccs.models import Evidencia
 import cpccs.views
 
 class SectorSerializer(serializers.ModelSerializer):
@@ -209,4 +210,14 @@ class EtniaSerializer(serializers.ModelSerializer):
         fields = (
             'id',
             'nombre',
+            )
+class EvidenciaSerializer(serializers.ModelSerializer):
+    denuncia=serializers.PrimaryKeyRelatedField(source='denunciaid',queryset=PreDenuncia.objects.all())
+
+    class Meta:
+        model = Evidencia
+        fields = (
+            'id',
+            'denuncia',
+            'archivo',
             )

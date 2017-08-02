@@ -45,8 +45,11 @@ urlpatterns = [
     url(r'^etnias/$',
         views.EtniaList.as_view(),
         name=views.EtniaList.name),
+url(r'^evidencias/$',
+        views.Evidencia.as_view(),
+        name=views.Evidencia.name),
     url(r'^$',
         views.ApiRoot.as_view(),
         name=views.ApiRoot.name),
-    url(r'^upload/(?P<filename>[^/]+)$', FileUploadView.as_view()),
+    #url(r'^upload/(?P<filename>[^/]+)$', FileUploadView.as_view()),
 ]
