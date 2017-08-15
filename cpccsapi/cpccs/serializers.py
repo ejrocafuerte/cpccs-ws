@@ -14,6 +14,8 @@ from cpccs.models import Usuario
 from cpccs.models import InstitucionCiudad
 from cpccs.models import Pais
 from cpccs.models import Etnia
+from cpccs.models import Contenido
+from cpccs.models import Evidencia
 import cpccs.views
 
 class SectorSerializer(serializers.ModelSerializer):
@@ -209,4 +211,24 @@ class EtniaSerializer(serializers.ModelSerializer):
         fields = (
             'id',
             'nombre',
+            )
+
+class ContenidoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Contenido
+        fields = (
+            'id',
+            'descripcion',
+            'contenido',
+            'url_video',
+            )
+
+class EvidenciaSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Evidencia
+        fields = (
+            'id',
+            'denuncia',
+            'archivo',
             )

@@ -12,6 +12,8 @@ from cpccs.models import Region
 from cpccs.models import Usuario
 from cpccs.models import Pais
 from cpccs.models import Etnia
+from cpccs.models import Contenido
+from cpccs.models import Evidencia
 
 from cpccs.serializers import SectorSerializer
 from cpccs.serializers import CiudadSerializer
@@ -27,8 +29,11 @@ from cpccs.serializers import RegionSerializer
 from cpccs.serializers import UsuarioSerializer
 from cpccs.serializers import PaisSerializer
 from cpccs.serializers import EtniaSerializer
+from cpccs.serializers import ContenidoSerializer
+from cpccs.serializers import EvidenciaSerializer
 
 from rest_framework import generics
+from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
 
@@ -130,11 +135,25 @@ class EtniaList(generics.ListCreateAPIView):
     queryset = Etnia.objects.all()
     serializer_class = EtniaSerializer
     name = 'etnia-list'
+
+class ContenidoList(generics.ListCreateAPIView):
+    queryset = Contenido.objects.all()
+    serializer_class = ContenidoSerializer
+    name = 'Contenido-list'
+
+class Evidencia(generics.ListCreateAPIView):
+    queryset = Evidencia.objects.all()
+    serializer_class = EvidenciaSerializer
+    name = 'evidencia-list'
+
+#class Descarga
+'''
 class FileUploadView(views.APIView):
     parser_classes = (FileUploadParser,)
     def put(self, request, filename, format=None):
         file_obj = request.data['file']
         return Response(status=204)
+'''
 
 class ApiRoot(generics.GenericAPIView):
     name = 'api-root'
@@ -153,5 +172,7 @@ class ApiRoot(generics.GenericAPIView):
 			'regiones': reverse(RegionList.name, request=request),
 			'paises': reverse(PaisList.name, request=request),
 			'etnias': reverse(EtniaList.name, request=request),
-			'usuarios': reverse(UsuarioList.name, request=request)
+			'contenidos': reverse(ContenidoList.name, request=request),
+			'usuarios': reverse(UsuarioList.name, request=request),
+			'evidencias': reverse(Evidencia.name, request=request)
             })

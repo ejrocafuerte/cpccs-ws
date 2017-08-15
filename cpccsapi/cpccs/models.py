@@ -1,5 +1,8 @@
 from django.db import models
 
+def make_dir(instance, filename):
+    return 'uploads/denuncia/{0}/{1}'.format(instance.denuncia,filename)
+
 # Create your models here.
 class Sector(models.Model):
     nombre = models.CharField(max_length=255)
@@ -83,9 +86,9 @@ class Ocupacion(models.Model):
 
 class PreDenuncia(models.Model):
     tipodenuncia = models.CharField(max_length=1)
-    generodenunciante = models.CharField(max_length=1)
+    generodenunciante = models.CharField(max_length=255)
     descripcioninvestigacion = models.CharField(max_length=255)
-    generodenunciado = models.CharField(max_length=1)
+    generodenunciado = models.CharField(max_length=255)
     funcionariopublico = models.CharField(max_length=255, blank=True, default='')
     #id = models.IntegerField(primary_key=True)
     niveleducaciondenunciante = models.ForeignKey(
@@ -245,3 +248,19 @@ class Etnia(models.Model):
     class Meta:
         db_table='etnia'
         ordering = ('nombre',)
+
+class Contenido(models.Model):
+    descripcion=models.CharField(max_length=255)
+    contenido=models.CharField(max_length=255)
+    url_video=models.CharField(max_length=255)
+    def __str__(self):
+        return self.descripcion
+    class Meta:
+        db_table='contenido'
+
+class Evidencia(models.Model):
+    denuncia=models.CharField(max_length=255)
+    fecha=models.DateField(auto_now=True)
+    archivo=models.FileField(upload_to=make_dir)
+    class Meta:
+        db_table='evidencia'
