@@ -180,6 +180,8 @@ USE_TZ = True
 # https://docs.djangoproject./en/1.10/howto/static-files/
 STATIC_ROOT = '/cpccs-ws/cpccsapi/static/'
 STATIC_URL = '/static/'
+DENUNCIA_ROOT = './uploads/denuncia/'
+DENUNCIA_URL='/evidencias/uploads/denuncia/'
 
 REST_FRAMEWORK = {
 	'DEFAULT_PAGINATION_CLASS':

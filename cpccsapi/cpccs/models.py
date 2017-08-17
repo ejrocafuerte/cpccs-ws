@@ -1,7 +1,7 @@
 from django.db import models
 
 def make_dir(instance, filename):
-    return 'uploads/denuncia/{0}/{1}'.format(instance.denuncia,filename)
+    return settings.DENUNCIA_ROOT+'/{0}/{1}'.format(instance.denuncia,filename)
 
 # Create your models here.
 class Sector(models.Model):
@@ -162,6 +162,7 @@ class Ciudad(models.Model):
         return self.nombre
 
 class Reclamo(models.Model):
+    fechaIngreso = models.DateField(auto_now_add=True)
     nombresapellidosdenunciante = models.CharField(max_length=255)
     tipoidentificacion = models.CharField(max_length=255)
     numidenti = models.CharField(max_length=255)

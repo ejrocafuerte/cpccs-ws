@@ -1,6 +1,9 @@
 from django.conf.urls import url
 from cpccs import views
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 urlpatterns = [
     url(r'^sectores/$',
@@ -54,5 +57,5 @@ urlpatterns = [
     url(r'^$',
         views.ApiRoot.as_view(),
         name=views.ApiRoot.name)
-]#url(r'^evidencias/uploads/([0-9]+)/([0-9]+)/([0-9]+)/(?P<filename>[^/]+)$',.descarga_archivo())
+]+static(settings.DENUNCIA_URL,document_root=settings.DENUNCIA_ROOT)
 #url(r'^evidencias/uploads/([0-9]+)/([0-9]+)/([0-9]+)/(?P<filename>[^/]+)$', FileUploadView.as_view()),
