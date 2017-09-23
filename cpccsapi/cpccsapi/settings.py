@@ -28,9 +28,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
 	#'.6v3gjmadmw.sa-east-1.elasticbeanstalk.com'
-	#'localhost',
+	'localhost',
 	#'127.0.0.1',
-	'ejrocafuerte.pythonanywhere.com',
+	#'ejrocafuerte.pythonanywhere.com',
 ]
 
 
@@ -107,40 +107,23 @@ DATABASES = {
 #		'HOST': 'localhost',
 #		'PORT': '5432',
 #	}
-	#'default': {
-		#'ENGINE': 'django.db.backends.postgresql',
-	#    'ENGINE': 'django.db.backends.mysql',
-	#	'OPTIONS' : {
-	 #           'options': '-c search_path=cpccs'
-	  #   },
-		# Replace games with your desired database name
-		#'NAME': 'omkbmadd',
-	   # 'NAME':'cpccsDB',
-		# Replace username with your desired user name
-		#'USER': 'omkbmadd',
-		#'USER':'ejrocafuerte',
-		# Replace password with your desired password
-		#'PASSWORD': 'jK72m7jV5797WwXGbFX9CV0p86-gBU4x',
-		#'PASSWORD':'NyZjeXDQFcUC4xiaC_WXrF9yKXA-1gH9',
-		# Replace 127.0.0.1 with the PostgreSQL host
-		#'HOST': 'babar.elephantsql.com',
-		#'HOST':'ejrocafuerte.mysql.pythonanywhere-services.com',
-		# Replace 5432 with the PostgreSQL configured port
-		# in case you aren't using the default port
-		#'PORT': '3306',
 	#}
-	'default': {
-		'OPTIONS':{
-	        'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
-	        },
-	    'ENGINE': 'django.db.backends.mysql',
-	    'NAME': 'ejrocafuerte$default',
-	    'USER': 'ejrocafuerte',
-		'PASSWORD': 'Irisluciana01',
-		'HOST': 'ejrocafuerte.mysql.pythonanywhere-services.com',
-		}
-		}
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    },
 
+	#'default': {
+	#	'OPTIONS':{
+	#       'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+	#        },
+	#    'ENGINE': 'django.db.backends.mysql',
+	#    'NAME': 'ejrocafuerte$default',
+	#    'USER': 'ejrocafuerte',
+	#	'PASSWORD': 'Irisluciana01',
+	#	'HOST': 'ejrocafuerte.mysql.pythonanywhere-services.com',
+	#	}
+}
 
 
 # Password validation
