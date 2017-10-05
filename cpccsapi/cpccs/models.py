@@ -33,7 +33,7 @@ class Genero(models.Model):
     nombre = models.CharField(max_length=25)
 
     class Meta:
-        db_table = 'estadocivil'
+        db_table = 'genero'
         ordering = ('nombre',)
 
     def __str__(self):
@@ -80,11 +80,11 @@ class Ciudad(models.Model):
         return self.nombre
 
 
-class tipo_requerimiento(models.Model):
+class TipoRequerimiento(models.Model):
     nombre = models.CharField(max_length=10)
 
     class Meta:
-        db_table = 'requerimiento'
+        db_table = 'TipoRrequerimiento'
         ordering = ('id',)
 
     def __str__(self):
@@ -94,7 +94,7 @@ class Requerimiento(models.Model):
     fechaIngreso = models.DateField(auto_now_add=True)
     ###0 para denuncia 1 para pedido
     tipodenuncia = models.ForeignKey(
-        tipo_requerimiento,
+        TipoRequerimiento,
         db_column='tipo_requerimiento_id',
         related_name='tiporequerimiento',
     )
@@ -120,6 +120,11 @@ class Requerimiento(models.Model):
         Genero,
         db_column='generodenuncianteid',
         related_name='generodenunciante',
+    )
+    estado_civil_denunciante = models.ForeignKey(
+        EstadoCivil,
+        db_column='estadocivildenuncianteid',
+        related_name='estadocivildenunciante',
     )
     etnia_denunciante = models.ForeignKey(
         Etnia,
@@ -161,7 +166,7 @@ class Requerimiento(models.Model):
     parroquia_denunciado = models.CharField(max_length=30)
 
     class Meta:
-        db_table = 'predenuncia '
+        db_table = 'requerimiento'
         ordering = ('id',)
 
     def __str__(self):
