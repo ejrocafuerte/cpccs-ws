@@ -139,7 +139,7 @@ class Requerimiento(models.Model):
     institucion_denunciante = models.CharField(max_length=60)
     cargo_denunciante = models.CharField(max_length=100)
     tipo_identificacion = models.CharField(max_length=10)
-    indetificacion_id = models.CharField(max_length=10)
+    identificacion_id = models.CharField(max_length=10)
     pais = models.CharField(max_length=30)
     ###Descripcion de denuncia y evidencia
     descripcion = models.CharField(max_length=255)

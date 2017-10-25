@@ -58,25 +58,26 @@ class RequerimientoList(generics.ListCreateAPIView):
     serializer_class = RequerimientoSerializer
     name = 'requerimiento-list'
     permission_classes = (permissions.IsAuthenticated,)
+    '''
     def perform_create(self, serializer):
         try:
             descripcion = self.request.data['descripcion']
-            tipo = self.request.data['tipo']
-            if tipo == '0':
+            tipo = self.request.data['tiporequerimiento']
+            if tipo == '1':
                 accion = 'Denuncia'
-            else:
+            elif tipo =='2':
                 accion = 'Petición'
         except KeyError:
             descripcion = ''
             accion = 'Petición'
         instance = serializer.save()
         send_mail( 'Confirmaciòn Envio De Formulario','<h1>Envio Exitoso</h1> <p> Sr(a)' +
-                   instance.nombresapellidosdenunciante + ' su ' + accion + ' ha sido enviada correctamente </p> <h3>' +
-                   accion + ': ' + descripcion + '</h3>', 'prueba.envio.formulario@gmail.com', [instance.email],
+                   instance.nombres_apellidos_denunciante + ' su ' + accion + ' ha sido enviada correctamente </p> <h3>' +
+                   accion + ': ' + descripcion + '</h3>', 'prueba.envio.formulario@gmail.com', [instance.correo_denunciante],
                    fail_silently = False, html_message = '<h1> Envio Exitoso </h1> <p> Sr(a) ' +
-                instance.nombresapellidosdenunciante + ' su ' + accion + ' ha sido enviada correctamente </p><h3>'+
+                instance.nombres_apellidos_denunciante + ' su ' + accion + ' ha sido enviada correctamente </p><h3>'+
                 accion + ': ' + descripcion + '</h3>')
-
+'''
 class ProvinciaList(generics.ListAPIView):
     queryset = Provincia.objects.all()
     serializer_class = ProvinciaSerializer
