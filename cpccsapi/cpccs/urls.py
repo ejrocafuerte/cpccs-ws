@@ -6,6 +6,12 @@ from django.conf.urls.static import static
 
 
 urlpatterns = [
+url(r'^tiporequerimiento/$',
+        views.TipoRequerimientoList.as_view(),
+        name=views.TipoRequerimientoList.name),
+url(r'^generos/$',
+        views.GeneroList.as_view(),
+        name=views.GeneroList.name),
     url(r'^ciudades/$',
         views.CiudadList.as_view(),
         name=views.CiudadList.name),

@@ -10,8 +10,33 @@ from .models import Etnia
 from .models import Contenido
 from .models import Evidencia
 from .models import Genero
-import cpccs.views
 
+
+class EvidenciaSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Evidencia
+        fields = (
+            'id',
+            'denuncia',
+            'archivo',
+            )
+class TipoRequerimientoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TipoRequerimiento
+        fields = (
+            'id',
+            'nombre',
+        )
+
+class GeneroSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Genero
+        fields = (
+            'id',
+            'nombre',
+        )
 
 class CiudadSerializer(serializers.ModelSerializer):
 
@@ -43,8 +68,7 @@ class NivelEducacionSerializer(serializers.ModelSerializer):
 
 class RequerimientoSerializer(serializers.ModelSerializer):
     #fecha_de_ingreso = serializers.PrimaryKeyRelatedField(source='fechaingreso')
-    tipo_requerimiento = serializers.PrimaryKeyRelatedField(source='tiporequerimiento', queryset=TipoRequerimiento.objects.all())
-    identidad_reservada= serializers.BooleanField()
+    tipo_requerimiento = serializers.PrimaryKeyRelatedField(source='tiporequerimientoid', queryset=TipoRequerimiento.objects.all())
     nombres_apellidos_denunciante = serializers.CharField()
     edad_denunciante = serializers.CharField()
     correo_denunciante = serializers.EmailField()
@@ -95,7 +119,6 @@ class RequerimientoSerializer(serializers.ModelSerializer):
             'tipo_identificacion',
             'identificacion_id',
             'pais',
-
             'descripcion_investigacion',
 			'genero_denunciado',
             'institucion_denunciado',
@@ -104,6 +127,7 @@ class RequerimientoSerializer(serializers.ModelSerializer):
             'ciudad_denunciado',
             'parroquia_denunciado',
 			)
+
 
 
 class ProvinciaSerializer(serializers.ModelSerializer):
@@ -145,12 +169,3 @@ class ContenidoSerializer(serializers.ModelSerializer):
             'url_video',
             )
 
-class EvidenciaSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Evidencia
-        fields = (
-            'id',
-            'denuncia',
-            'archivo',
-            )

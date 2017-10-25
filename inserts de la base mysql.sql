@@ -1,9 +1,8 @@
 --  En WS FINAL agregar campos
 -- SET search_path=public;
 -- use ejrocafuerte$public;
-use cpccsdb;
+use ejrocafuerte$cpccs-ws;
 -- LOS SECTORES NO HAN SIDO AGREGADOS.... CREO SECTORES CUALQUIERA PARA CUMPLIR CON LOS REQUISITOS
-
 --  tabla provincia columnas id, nombre, regionid
 INSERT INTO provincia VALUES (10, 'Azuay');
 INSERT INTO provincia VALUES (1, 'Pichincha');

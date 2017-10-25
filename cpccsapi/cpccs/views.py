@@ -7,6 +7,8 @@ from .models import Usuario
 from .models import Etnia
 from .models import Contenido
 from .models import Evidencia
+from .models import Genero
+from .models import TipoRequerimiento
 
 from .serializers import CiudadSerializer
 from .serializers import EstadoCivilSerializer
@@ -17,14 +19,14 @@ from .serializers import UsuarioSerializer
 from .serializers import EtniaSerializer
 from .serializers import ContenidoSerializer
 from .serializers import EvidenciaSerializer
+from .serializers import GeneroSerializer
+from .serializers import TipoRequerimientoSerializer
 
 from rest_framework import generics
-from rest_framework.views import APIView
+
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
 
-from rest_framework import filters
-from django_filters import NumberFilter, DateTimeFilter, AllValuesFilter
 from rest_framework import permissions
 
 from django.core.mail import send_mail
@@ -96,6 +98,16 @@ class Evidencia(generics.ListCreateAPIView):
     serializer_class = EvidenciaSerializer
     name = 'evidencia-list'
 
+class GeneroList(generics.ListCreateAPIView):
+    queryset = Genero.objects.all()
+    serializer_class = GeneroSerializer
+    name = 'genero-list'
+
+class TipoRequerimientoList(generics.ListCreateAPIView):
+    queryset = TipoRequerimiento.objects.all()
+    serializer_class = TipoRequerimientoSerializer
+    name = 'tiporequerimiento-list'
+
 #class Descarga
 '''
 class FileUploadView(views.APIView):
@@ -109,13 +121,15 @@ class ApiRoot(generics.GenericAPIView):
     name = 'api-root'
     def get(self, request, *args, **kwargs):
         return Response({
+            'tiporequerimiento': reverse(TipoRequerimientoList.name, request=request),
+            'provincias': reverse(ProvinciaList.name, request=request),
             'ciudades': reverse(CiudadList.name, request=request),
             'estados-civiles': reverse(EstadoCivilList.name, request=request),
             'niveles-educacion': reverse(NivelEducacionList.name, request=request),
-            'requerimiento': reverse(RequerimientoList.name, request=request),
-			'provincias': reverse(ProvinciaList.name, request=request),
-			'etnias': reverse(EtniaList.name, request=request),
+            'genero': reverse(GeneroList.name,request=request),
+            'etnias': reverse(EtniaList.name, request=request),
 			'contenidos': reverse(ContenidoList.name, request=request),
 			'usuarios': reverse(UsuarioList.name, request=request),
-			'evidencias': reverse(Evidencia.name, request=request)
+            'requerimiento': reverse(RequerimientoList.name, request=request),
+			'evidencias': reverse(Evidencia.name, request=request),
             })

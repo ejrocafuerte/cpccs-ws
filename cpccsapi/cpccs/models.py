@@ -84,8 +84,8 @@ class TipoRequerimiento(models.Model):
     nombre = models.CharField(max_length=10)
 
     class Meta:
-        db_table = 'TipoRrequerimiento'
-        ordering = ('id',)
+        db_table = 'tiporequerimiento'
+        ordering = ('nombre',)
 
     def __str__(self):
         return self.nombre
@@ -96,7 +96,7 @@ class Requerimiento(models.Model):
     tipodenuncia = models.ForeignKey(
         TipoRequerimiento,
         db_column='tipo_requerimiento_id',
-        related_name='tiporequerimiento',
+        related_name='tiporequerimientoid',
     )
     identidad_reservada = models.BooleanField(default=0)
     #DATOS DEL DENUNCIANTE - PETICIONARIO
